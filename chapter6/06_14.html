@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06-14</title>
+    <link rel="stylesheet" type="text/css" href="../sample.css">
+</head>
+<body>
+<div id="app">
+    <ul>
+        <list-component message="Hello" count="100"></list-component>
+        <list-component message="씬짜오" count="21"></list-component>
+        <!--<list-component message="Hello" v-bind:count="100"></list-component>-->
+        <!--<list-component message="씬짜오" :count="21"></list-component>-->
+        <list-component message="니하오마"></list-component>
+        <list-component count="1000"></list-component>
+        <!--<list-component :count="1000"></list-component>-->
+    </ul>
+</div>
+<template id="listTemplate">
+    <li>{{message}}</li>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    Vue.config.devtools = true;
+
+    Vue.component('list-component', {
+        template: '#listTemplate',
+        props: {
+            message: {type: String, default: '안녕하세요'},
+            count: {type: Number, required: true},
+        },
+    });
+
+    var vm = new Vue({
+        el: '#app',
+    });
+</script>
+</body>
+</html>

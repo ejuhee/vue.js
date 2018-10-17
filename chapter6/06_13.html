@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06-13</title>
+    <link rel="stylesheet" type="text/css" href="../sample.css">
+</head>
+<body>
+<div id="app">
+    <ul>
+        <list-component myMessage="Hello"></list-component>
+        <list-component myMmessage="씬짜오"></list-component>
+        <list-component myMmessage="니하오마"></list-component>
+        <!--<list-component my-message="Hello"></list-component>-->
+        <!--<list-component my-message="씬짜오"></list-component>-->
+        <!--<list-component my-message="니하오마"></list-component>-->
+    </ul>
+</div>
+<template id="listTemplate">
+    <li>{{myMessage}}</li>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    Vue.config.devtools = true;
+
+    Vue.component('list-component', {
+        template: '#listTemplate',
+        props: [ 'myMessage' ]
+    });
+
+    var vm = new Vue({
+        el: '#app',
+    });
+</script>
+</body>
+</html>
