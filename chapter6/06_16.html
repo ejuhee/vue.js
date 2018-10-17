@@ -8,9 +8,9 @@
 <body>
 <div id="app">
     <ul>
-        <list-component message="Hello" v-bind:count="100" v-bind:countries="['미국', '영국', '호주']"></list-component>
+        <list-component message="Hello" v-bind:count="100" v-bind:countries="['미국','영국','호주']"></list-component>
         <list-component message="씬짜오" :count="21" :countries="['베트남']"></list-component>
-        <list-component message="니하오마" :countries="['중국, '타이완']"></list-component>
+        <list-component message="니하오마" :countries="['중국', '타이완']"></list-component>
         <list-component :count="1000"></list-component>
     </ul>
 </div>
@@ -32,8 +32,8 @@
                 type: Array,
                 default: function() {
                     return ['대한민국'];
-                }
-            }
+                },
+            },
         },
     });
 
