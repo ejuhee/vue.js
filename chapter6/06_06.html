@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06-06</title>
+    <link rel="stylesheet" type="text/css" href="../sample.css">
+</head>
+<body>
+<div id="app">
+    <select>
+        <option-component></option-component>
+        <option-component></option-component>
+    </select>
+</div>
+<div><a href="/">목록</a></div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script type="text/javascript">
+    Vue.component('option-component', {
+      template: '<option>hello</option>'
+    });
+
+    var v = new Vue({
+      el: '#app',
+    });
+</script>
+</body>
+</html>

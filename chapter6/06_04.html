@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06-04</title>
+    <link rel="stylesheet" type="text/css" href="../sample.css">
+</head>
+<body>
+<div id="app">
+    <hello-component></hello-component>
+    <hello-component></hello-component>
+    <hello-component></hello-component>
+</div>
+<div><a href="/">목록</a></div>
+
+<template id="helloTemplate">
+    <div>hello world!!!</div>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script type="text/javascript">
+    Vue.component('hello-component', {
+        template: '#helloTemplate',
+    });
+
+    var v = new Vue({
+      el: '#app',
+    });
+</script>
+</body>
+</html>

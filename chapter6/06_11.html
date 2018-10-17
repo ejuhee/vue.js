@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06-11</title>
+    <link rel="stylesheet" type="text/css" href="../sample.css">
+</head>
+<body>
+<div id="app">
+    <time-component></time-component>
+    <time-component></time-component>
+</div>
+<div><a href="/">목록</a></div>
+
+<template id="timeTemplate">
+    <div>
+        <span>{{nowTS}}</span>
+        <button v-on:click="timeClick">현재 시간</button>
+    </div>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+  var data = { nowTS: 0 };
+
+  Vue.component('time-component', {
+    template: '#timeTemplate',
+    data: function() {
+      return data;
+    },
+    methods: {
+      timeClick: function(e) {
+        this.nowTS = (new Date()).getTime();
+      }
+    },
+  });
+
+  var v = new Vue({
+    el: '#app',
+  })
+
+</script>
+</body>
+</html>
