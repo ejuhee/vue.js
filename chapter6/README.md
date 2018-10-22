@@ -19,67 +19,67 @@ tagname은 대소문자를 구분하지 않기 때문에 파스칼(pascal)/카�
 options는 Vue 인스턴스의 옵션과 같이 data, methods, computed, watch 옵션을 사용할 수 있다.
 
 > example01: 인라인(템플릿 옵션에 템플릿 문자열을 사용) 템플릿을 사용한 예제
->> ~~~html
->> <div id="app">
->>     <hello-component></hello-component>
->>     <hello-component></hello-component>
->>     <hello-component></hello-component>
->> </div>
->>
->> <script type="text/javascript">
->>     Vue.component('hello-component', {
->>       template: '<div>hello world</div>',
->>     });
->>
->>     var v = new Vue({
->>       el: '#app',
->>     });
->> </script>
->> ~~~
+> ~~~html
+> <div id="app">
+>     <hello-component></hello-component>
+>     <hello-component></hello-component>
+>     <hello-component></hello-component>
+> </div>
+>
+> <script type="text/javascript">
+>     Vue.component('hello-component', {
+>       template: '<div>hello world</div>',
+>     });
+>
+>     var v = new Vue({
+>       el: '#app',
+>     });
+> </script>
+> ~~~
 
 > example02: 템플릿 문자열을 포함하고 있는 ```<template>``` 태그를 사용한 예제
->> ~~~html
->> <div id="app">
->>     <hello-component></hello-component>
->>     <hello-component></hello-component>
->>     <hello-component></hello-component>
->> </div>
->>
->> <template id="helloTemplate">
->>     <div>hello world!!!</div>
->> </template>
->> <script type="text/javascript">
->>     Vue.component('hello-component', {
->>         template: '#helloTemplate',
->>     });
->>
->>     var v = new Vue({
->>       el: '#app',
->>     });
->> </script>
->> ~~~
+> ~~~html
+> <div id="app">
+>     <hello-component></hello-component>
+>     <hello-component></hello-component>
+>     <hello-component></hello-component>
+> </div>
+>
+> <template id="helloTemplate">
+>     <div>hello world!!!</div>
+> </template>
+> <script type="text/javascript">
+>     Vue.component('hello-component', {
+>         template: '#helloTemplate',
+>     });
+>
+>     var v = new Vue({
+>       el: '#app',
+>     });
+> </script>
+> ~~~
 
 > example03: 템플릿 문자열을 포함하고 있는 ```<script type="text/x-template">``` 태그를 사용한 예제
->> ~~~html
->> <div id="app">
->>     <hello-component></hello-component>
->>     <hello-component></hello-component>
->>     <hello-component></hello-component>
->> </div>
->>
->> <script type="text/x-template" id="helloTemplate">
->>     <div>hello world!!!</div>
->> </script>
->> <script type="text/javascript">
->>     Vue.component('hello-component', {
->>         template: '#helloTemplate',
->>     });
->>
->>     var v = new Vue({
->>       el: '#app',
->>     });
->> </script>
->> ~~~
+> ~~~html
+> <div id="app">
+>     <hello-component></hello-component>
+>     <hello-component></hello-component>
+>     <hello-component></hello-component>
+> </div>
+>
+> <script type="text/x-template" id="helloTemplate">
+>     <div>hello world!!!</div>
+> </script>
+> <script type="text/javascript">
+>     Vue.component('hello-component', {
+>         template: '#helloTemplate',
+>     });
+>
+>     var v = new Vue({
+>       el: '#app',
+>     });
+> </script>
+> ~~~
 
 
 ### DOM 템플릿 구문 작성 시 주의 사항
@@ -118,26 +118,26 @@ options는 Vue 인스턴스의 옵션과 같이 data, methods, computed, watch �
   - ```<template>``` 태그를 사용할 때는 is 속성을 사용해야 한다.
 
 
-2. 템플릿 문자열 안에는 Root Element는 반듯이 하나여야 한다. 여러개의 Root Element가 존재할 경우 오류가 발생함으로
-<div>로 한 번 더 감싸주어 오류를 해결할 수 있다.
+2. 템플릿 문자열 안에는 Root Element는 반듯이 하나여야 한다. 여러개의 Root Element가 존재할
+경우 오류가 발생함으로 ```<div>```로 한 번 더 감싸주어 오류를 해결할 수 있다.
 
 > 오류가 발생하는 코드
-~~~html
-<template id="helloTemplate">
-    <div>hello</div>
-    <div>hello</div>
-</template>
-~~~
+> ~~~html
+> <template id="helloTemplate">
+>     <div>hello</div>
+>     <div>hello</div>
+> </template>
+> ~~~
 
 > 정상적으로 동작하는 코드
-~~~html
-<template id="helloTemplate">
-    <div>
-        <div>hello</div>
-        <div>hello</div>
-    </div>
-</template>
-~~~
+> ~~~html
+> <template id="helloTemplate">
+>     <div>
+>         <div>hello</div>
+>         <div>hello</div>
+>     </div>
+> </template>
+> ~~~
 
 
 ### 컴포넌트에서의 data 옵션
