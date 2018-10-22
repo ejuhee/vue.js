@@ -16,8 +16,8 @@ Vue.component(tagname, options)
 * __options__: 컴포넌트에서 렌더링할 template 등을 지정한다.
 
 ```tagname```은 대소문자를 구분하지 않기 때문에 파스칼(pascal)/카멜(camel) 표기법이 아닌 케밥(kebob) 표기법을 사용한다.<br>
-```options```는 Vue 인스턴스의 옵션과 같이 data, methods, computed, watch 옵션을 사용할 수 있다.
-Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스가 생성되어야 한다.
+```options```는 Vue 인스턴스의 옵션과 같이 data, methods, computed, watch 옵션을 사용할 수 있다.<br>
+Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new Vue()```)가 생성되어야 한다.
 
 > example: 인라인(템플릿 옵션에 템플릿 문자열을 사용) 템플릿을 사용한 예제
 > ~~~html
