@@ -4,7 +4,7 @@
 Vue.js는 컴포넌트들을 조합해 하나의 애플리케이션을 만든다.<br>
 조합된 컴포넌트들은 부모-자식 관계인 트리 구조를 형성하며
 부모와 자식 컴포넌트 간의 정보 전달은 props와 event를 사용하여 정보를 전달한다.
-<img src="./img/component_struct.png" width="841px" height="343px"></img>
+<img src="../img/component_struct.png" width="841px" height="343px"></img>
 
 
 ### 컴포넌트의 작성
