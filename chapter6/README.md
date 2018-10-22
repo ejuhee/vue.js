@@ -1,23 +1,25 @@
 # Chapter6 컴포넌트 기초
 
 
-### 컴포넌트의 조합
+### 1. 컴포넌트의 조합
 Vue.js는 컴포넌트들을 조합해 하나의 애플리케이션을 만든다.<br>
 조합된 컴포넌트들은 부모-자식 관계인 트리 구조를 형성하며
 부모와 자식 컴포넌트 간의 정보 전달은 props와 event를 사용하여 정보를 전달한다.
 <img src="../img/component_struct.png" width="900px" height="368px"></img>
 
 
-### 컴포넌트의 작성
+### 2. 컴포넌트의 작성
 ~~~javascript
 Vue.component(tagname, options)
 ~~~
 * __tagname__: 컴포넌트를 사용할 태그명이다.
 * __options__: 컴포넌트에서 렌더링할 template 등을 지정한다.
+
 ```tagname```은 대소문자를 구분하지 않기 때문에 파스칼(pascal)/카멜(camel) 표기법이 아닌 케밥(kebob) 표기법을 사용한다.<br>
 ```options```는 Vue 인스턴스의 옵션과 같이 data, methods, computed, watch 옵션을 사용할 수 있다.
+Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스가 생성되어야 한다.
 
-> example01: 인라인(템플릿 옵션에 템플릿 문자열을 사용) 템플릿을 사용한 예제
+> example: 인라인(템플릿 옵션에 템플릿 문자열을 사용) 템플릿을 사용한 예제
 > ~~~html
 > <div id="app">
 >     <hello-component></hello-component>
@@ -36,7 +38,7 @@ Vue.component(tagname, options)
 > </script>
 > ~~~
 
-> example02: 템플릿 문자열을 포함하고 있는 ```<template>``` 태그를 사용한 예제
+> example: 템플릿 문자열을 포함하고 있는 ```<template>``` 태그를 사용한 예제
 > ~~~html
 > <div id="app">
 >     <hello-component></hello-component>
@@ -58,7 +60,7 @@ Vue.component(tagname, options)
 > </script>
 > ~~~
 
-> example03: 템플릿 문자열을 포함하고 있는 ```<script type="text/x-template">``` 태그를 사용한 예제
+> example: 템플릿 문자열을 포함하고 있는 ```<script type="text/x-template">``` 태그를 사용한 예제
 > ~~~html
 > <div id="app">
 >     <hello-component></hello-component>
@@ -81,7 +83,7 @@ Vue.component(tagname, options)
 > ~~~
 
 
-### DOM 템플릿 구문 작성 시 주의 사항
+### 3. DOM 템플릿 구문 작성 시 주의 사항
 1. 자식노드를 포함하는 요소에 대한 Vue 컴포넌트의 오류
 ~~~html
 <div id="app">
@@ -139,44 +141,46 @@ Vue.component(tagname, options)
 > ~~~
 
 
-### 컴포넌트에서의 data 옵션
+### 4. 컴포넌트에서의 data 옵션
 * 컴포넌트 내부의 로컬 상태 정보를 저장하기 위해 data 옵션을 사용한다.
 * data 옵션에 리터럴 객체를 작성하면 오류가 발생한다.
 * data 옵션이 정상적으로 렌더링되기 위해서는 함수가 호출되어 객체가 리턴되게 한다.
 * 함수 호출 시 리턴된 객체는 컴포넌트 각각 data가 서로 다른 객체를 참조하게 된다.
-~~~html
-<div id="app">
-    <time-component></time-component>
-    <time-component></time-component>
-</div>
-<div><a href="../">목록</a></div>
+> example: data 옵션에 객체를 리턴하는 함수를 작성한 예제
+> ~~~html
+> <div id="app">
+>     <time-component></time-component>
+>     <time-component></time-component>
+> </div>
+> <div><a href="../">목록</a></div>
+>
+> <template id="timeTemplate">
+>     <div>
+>         <span>{{nowTS}}</span>
+>         <button v-on:click="timeClick">현재 시간</button>
+>     </div>
+> </template>
+> <script>
+>     Vue.component('time-component', {
+>       template: '#timeTemplate',
+>       data: function() {
+>         return { nowTS: 0 }
+>       },
+>       methods: {
+>         timeClick: function(e) {
+>           this.nowTS = (new Date()).getTime();
+>         }
+>       },
+>     });
+>
+>     var v = new Vue({
+>       el: '#app',
+>     });
+> </script>
+> ~~~
 
-<template id="timeTemplate">
-    <div>
-        <span>{{nowTS}}</span>
-        <button v-on:click="timeClick">현재 시간</button>
-    </div>
-</template>
-<script>
-    Vue.component('time-component', {
-      template: '#timeTemplate',
-      data: function() {
-        return { nowTS: 0 }
-      },
-      methods: {
-        timeClick: function(e) {
-          this.nowTS = (new Date()).getTime();
-        }
-      },
-    });
-
-    var v = new Vue({
-      el: '#app',
-    })
-
-</script>
-~~~
-<img src="../img/data_option.png" width="492px" height="485px"></img>
+> 각각의 컴포넌트의 data를 참조하는 모습
+> <img src="../img/data_option.png" width="492px" height="485px"></img>
 
 
 ### props와 event
