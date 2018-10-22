@@ -8,6 +8,8 @@ Vue.js는 컴포넌트들을 조합해 하나의 애플리케이션을 만든다
 <img src="../img/component_struct.png" width="900px" height="368px"></img>
 
 
+
+
 ### 2. 컴포넌트의 작성
 ~~~javascript
 Vue.component(tagname, options)
@@ -83,6 +85,8 @@ Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new V
 > ~~~
 
 
+
+
 ### 3. DOM 템플릿 구문 작성 시 주의 사항
 ##### 자식노드를 포함하는 요소에 대한 Vue 컴포넌트의 오류
 - HTML 요소들은 자식 요소를 포함 시킬 수 있으며 어떤 요소들은 자식 요소가 정해져 있는 경우가 있다.
@@ -121,6 +125,7 @@ Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new V
 ##### 템플릿 문자열 안에는 Root Element는 반듯이 하나여야 함
 * 여러개의 Root Element가 존재할ㅡ경우 오류가 발생함으로 ```<div>```로 한 번 더 감싸주어 오류를 해결할 수 있다.
 
+
 > 오류가 발생하는 코드
 > ~~~html
 > <template id="helloTemplate">
@@ -138,6 +143,8 @@ Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new V
 >     </div>
 > </template>
 > ~~~
+
+
 
 
 ### 4. 컴포넌트에서의 data 옵션
@@ -177,10 +184,13 @@ Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new V
 >     });
 > </script>
 > ~~~
-
 <img src="../img/data_option.png" width="492px" height="485px"></img>
 
 
-### props와 event
 
-### 이벤트 버스 객체를 이용한 통신
+
+### 5. props와 event
+
+
+
+### 6.이벤트 버스 객체를 이용한 통신
