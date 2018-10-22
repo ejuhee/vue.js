@@ -85,6 +85,11 @@ Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new V
 
 ### 3. DOM 템플릿 구문 작성 시 주의 사항
 1. 자식노드를 포함하는 요소에 대한 Vue 컴포넌트의 오류
+- HTML 요소들은 자식 요소를 포함 시킬 수 있으며 어떤 요소들은 자식 요소가 정해져 있는 경우가 있다.
+- 아래 예제를 살펴보면 ```<select>``` 요소는 ```<option>``` 요소를 필수 자식 노드로 가지게 되는데
+코드 상에는 ```<option-component>``` 컴포넌트가 자식 노드로 배치되어 있다. 이 경우 Vue 컴포넌트를
+렌더링하기 전 구문 분석을 수행하게 되는데 구문 분석 단계에서 DOM 요소가 올바르지 않다고 판단하고
+정상적인 렌더링을 수행하지 못하는 문제가 발생하게 된다.
 ~~~html
 <div id="app">
     <select>
@@ -103,20 +108,15 @@ Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new V
     });
 </script>
 ~~~
-&nbsp;&nbsp; - HTML 요소들은 자식 요소를 포함 시킬 수 있으며 어떤 요소들은 자식 요소가 정해져 있는 경우가 있다.
-&nbsp;&nbsp; - 위의 예제를 살펴보면 ```<select>``` 요소는 ```<option>``` 요소를 필수 자식 노드로 가지게 되는데
-코드 상에는 ```<option-component>``` 컴포넌트가 자식 노드로 배치되어 있다.
-이 경우 Vue 컴포넌트를 렌더링하기 전 구문 분석을 수행하게 되는데 구문 분석 단계에서 DOM 요소가 올바르지 않다고 판단하고
-정상적인 렌더링을 수행하지 못하는 문제가 발생하게 된다.
-&nbsp;&nbsp; - 이 문제를 해결하기 위해서는 is 속성을 사용하면 된다.
+- 이 문제를 해결하기 위해서는 is 속성을 사용하면 된다.
 ~~~html
 <select>
     <option is="option-component"></option>
     <option is="option-component"></option>
 </select>
 ~~~
-&nbsp;&nbsp;- .vue 확장자를 사용하는 단일 파일 컴포넌트(Single File Component)를 작성하는 경우에는 사용하지 않아도 된다.
-&nbsp;&nbsp;- ```<template>``` 태그를 사용할 때는 is 속성을 사용해야 한다.
+- .vue 확장자를 사용하는 단일 파일 컴포넌트(Single File Component)를 작성하는 경우에는 사용하지 않아도 된다.
+- ```<template>``` 태그를 사용할 때는 is 속성을 사용해야 한다.
 
 
 2. 템플릿 문자열 안에는 Root Element는 반듯이 하나여야 한다. 여러개의 Root Element가 존재할
