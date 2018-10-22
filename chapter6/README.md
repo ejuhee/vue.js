@@ -14,9 +14,8 @@ Vue.component(tagname, options)
 ~~~
 * __tagname__: 컴포넌트를 사용할 태그명이다.
 * __options__: 컴포넌트에서 렌더링할 template 등을 지정한다.
-
-tagname은 대소문자를 구분하지 않기 때문에 파스칼(pascal)/카멜(camel) 표기법이 아닌 케밥(kebob) 표기법을 사용한다.<br>
-options는 Vue 인스턴스의 옵션과 같이 data, methods, computed, watch 옵션을 사용할 수 있다.
+```tagname```은 대소문자를 구분하지 않기 때문에 파스칼(pascal)/카멜(camel) 표기법이 아닌 케밥(kebob) 표기법을 사용한다.<br>
+```options```는 Vue 인스턴스의 옵션과 같이 data, methods, computed, watch 옵션을 사용할 수 있다.
 
 > example01: 인라인(템플릿 옵션에 템플릿 문자열을 사용) 템플릿을 사용한 예제
 > ~~~html
@@ -102,20 +101,20 @@ options는 Vue 인스턴스의 옵션과 같이 data, methods, computed, watch �
     });
 </script>
 ~~~
-  - HTML 요소들은 자식 요소를 포함 시킬 수 있으며 어떤 요소들은 자식 요소가 정해져 있는 경우가 있다.
-  - 위의 예제를 살펴보면 ```<select>``` 요소는 ```<option>``` 요소를 필수 자식 노드로 가지게 되는데
+&nbsp;&nbsp;- HTML 요소들은 자식 요소를 포함 시킬 수 있으며 어떤 요소들은 자식 요소가 정해져 있는 경우가 있다.
+&nbsp;&nbsp;- 위의 예제를 살펴보면 ```<select>``` 요소는 ```<option>``` 요소를 필수 자식 노드로 가지게 되는데
 코드 상에는 ```<option-component>``` 컴포넌트가 자식 노드로 배치되어 있다.
 이 경우 Vue 컴포넌트를 렌더링하기 전 구문 분석을 수행하게 되는데 구문 분석 단계에서 DOM 요소가 올바르지 않다고 판단하고
 정상적인 렌더링을 수행하지 못하는 문제가 발생하게 된다.
-  - 이 문제를 해결하기 위해서는 is 속성을 사용하면 된다.
+&nbsp;&nbsp;- 이 문제를 해결하기 위해서는 is 속성을 사용하면 된다.
 ~~~html
 <select>
     <option is="option-component"></option>
     <option is="option-component"></option>
 </select>
 ~~~
-  - .vue 확장자를 사용하는 단일 파일 컴포넌트(Single File Component)를 작성하는 경우에는 사용하지 않아도 된다.
-  - ```<template>``` 태그를 사용할 때는 is 속성을 사용해야 한다.
+&nbsp;&nbsp;- .vue 확장자를 사용하는 단일 파일 컴포넌트(Single File Component)를 작성하는 경우에는 사용하지 않아도 된다.
+&nbsp;&nbsp;- ```<template>``` 태그를 사용할 때는 is 속성을 사용해야 한다.
 
 
 2. 템플릿 문자열 안에는 Root Element는 반듯이 하나여야 한다. 여러개의 Root Element가 존재할
@@ -141,6 +140,44 @@ options는 Vue 인스턴스의 옵션과 같이 data, methods, computed, watch �
 
 
 ### 컴포넌트에서의 data 옵션
+* 컴포넌트 내부의 로컬 상태 정보를 저장하기 위해 data 옵션을 사용한다.
+* data 옵션에 리터럴 객체를 작성하면 오류가 발생한다.
+* data 옵션이 정상적으로 렌더링되기 위해서는 함수가 호출되어 객체가 리턴되게 한다.
+* 함수 호출 시 리턴된 객체는 컴포넌트 각각 data가 서로 다른 객체를 참조하게 된다.
+~~~html
+<div id="app">
+    <time-component></time-component>
+    <time-component></time-component>
+</div>
+<div><a href="../">목록</a></div>
+
+<template id="timeTemplate">
+    <div>
+        <span>{{nowTS}}</span>
+        <button v-on:click="timeClick">현재 시간</button>
+    </div>
+</template>
+<script>
+    Vue.component('time-component', {
+      template: '#timeTemplate',
+      data: function() {
+        return { nowTS: 0 }
+      },
+      methods: {
+        timeClick: function(e) {
+          this.nowTS = (new Date()).getTime();
+        }
+      },
+    });
+
+    var v = new Vue({
+      el: '#app',
+    })
+
+</script>
+~~~
+<img src="../img/data_option.png" width="492px" height="485px"></img>
+
 
 ### props와 event
 
