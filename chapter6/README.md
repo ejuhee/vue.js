@@ -179,8 +179,7 @@ Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new V
 > </script>
 > ~~~
 
-> 각각의 컴포넌트의 data를 참조하는 모습
-> <img src="../img/data_option.png" width="492px" height="485px"></img>
+<img src="../img/data_option.png" width="492px" height="485px"></img>
 
 
 ### props와 event
