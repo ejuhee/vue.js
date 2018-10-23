@@ -184,7 +184,7 @@ Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new V
 >     });
 > </script>
 > ~~~
-<img src="../img/data_option.png" width="492px" height="485px"></img>
+><img src="../img/data_option.png" width="492px" height="485px"></img>
 
 
 
@@ -204,7 +204,6 @@ Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new V
 > <div id="app">
 >     <parent-component :buttons="buttons"></parent-component>
 > </div>
-> <div><a href="../">목록</a></div>
 >
 > <!-- child Component 시작 --->
 > <template id="childTemplate">
