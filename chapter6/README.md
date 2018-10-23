@@ -196,7 +196,72 @@ Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new V
 이벤트를 발생시키고 이벤트 객체를 이용하여 정보를 전달하게 된다.
 <img src="../img/props_event.png" width="589px" height="358px"></img>
 
-
+> example: props와 event를 이용한 부모-자신 컴포넌트 간의 데이터 교환
+> ~~~html
+> <div id="app">
+>     <parent-component :buttons="buttons"></parent-component>
+> </div>
+> <div><a href="../">목록</a></div>
+>
+> <!-- child Component 시작 --->
+> <template id="childTemplate">
+>     <div>
+>         <button class="buttonstyle" v-on:click="clickEvent" v-bind:data-lang="buttonInfo.value">{{buttonInfo.text}}</button>
+>     </div>
+> </template>
+> <script>
+>     Vue.component('child-component', {
+>         template: '#childTemplate',
+>         props: [ 'buttonInfo' ],
+>         methods: {
+>             clickEvent: function(e) {
+>                 this.$emit('timeclick', e.target.innerText, e.target.dataset.lang);
+>             },
+>         },
+>     });
+> </script>
+> <!-- child Component 끝 -->
+>
+> <!-- parent Component 시작 -->
+> <template id="parent-template">
+>     <div>
+>         <child-component v-for="s in buttons" v-bind:button-info="s" v-on:timeclick="timeclickEvent"></child-component>
+>         <hr />
+>         <div>{{ msg }}</div>
+>     </div>
+> </template>
+> <script>
+>     Vue.component('parent-component', {
+>         template: '#parent-template',
+>         props: [ 'buttons' ],
+>         data: function() {
+>             return { msg: "" };
+>         },
+>         methods: {
+>             timeclickEvent: function(text, value) {
+>                 this.msg = text + ", " + value;
+>             },
+>         },
+>     });
+> </script>
+> <!-- parent Component 끝 -->
+>
+> <script>
+>     Vue.config.devtools = true;
+>
+>     var vm = new Vue({
+>         el: "#app",
+>         data: {
+>             buttons: [
+>                 { text: "Hello", value: "영어" },
+>                 { text: "씬짜오", value: "베트남어" },
+>                 { text: "니하오", value: "중국어" },
+>             ]
+>         }
+>     })
+> </script>
+> ~~~
+><img src="../img/data_option.png" width="981px" height="672px"></img>
 
 
 ### 6.이벤트 버스 객체를 이용한 통신
