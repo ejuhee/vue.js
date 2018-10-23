@@ -261,7 +261,7 @@ Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new V
 >     })
 > </script>
 > ~~~
-><img src="../img/data_option.png" width="981px" height="672px"></img>
+><img src="../img/props_event2.png" width="981px" height="672px"></img>
 
 
 ### 6.이벤트 버스 객체를 이용한 통신
