@@ -267,3 +267,51 @@ Vue componet를 렌더링하기 위해서는 하나의 Vue 인스턴스(```new V
 
 
 ### 6.이벤트 버스 객체를 이용한 통신
+* 부모-자식 관계의 컴포넌트들은 props와 events를 사용하여 정보를 전달하지만 부모-자식 관계가 아닌 경우는
+이벤트 버스(Event Bus) 객체를 만들어 정보를 전달한다.
+* 템플릿 문자열이나 data, method 등 옵션이 포함되지 않은 비었는 Vue 인스턴스를 만들어 이벤트 버스로 사용한다.
+> example: 이벤트 버스를 이용한 데이터 전달
+> ~~~javascript
+> // 이벤트 버스 객체
+> var eventBus = new Vue();
+>
+> // 첫 번째 자식 컴포넌트
+> Vue.component('child1-component', {
+>   template: '#child1Template',
+>   data: function() {
+>       return { currentTime: '' };
+>   },
+>   methods: {
+>       clickEvent: function() {
+>           var d = new Date();
+>           var t = d.toLocaleTimeString() + "" + d.getMilliseconds() + "ms";
+>           eventBus.$emit('click1', t);
+>           this.currentTime = t;
+>       },
+>   },
+> });
+>
+> // 두 번째 자식 컴포넌트
+> Vue.component('child2-component', {
+>   template: '#child2Template',
+>   data: function() {
+>       return { timelist: [] };
+>   },
+>   created: function() {
+>       eventBus.$on('click1', this.child1Click);
+>   },
+>   methods: {
+>       child1Click: function(time) {
+>           this.timelist.push(time);
+>       },
+>   },
+> });
+>
+> var vm = new Vue({
+>   el: "#app",
+> });
+> ~~~
+> * 코드 설명
+>   * 비어 있는 Vue 인스턴스로 eventBus 객체를 생성한다.
+>   * 첫번째 자식 노드에서 ```eventBus.$emit```을 사용하여 click1 이벤트가 발생하도록 한다.
+>   * 두번째 자식 노드에서 ```created``` 컴포넌트 훅 메서드 내부에 click1 이벤트가 발생하면 이벤트를 수신할 수 있게 ```eventBus.$on```을 작성한다.
